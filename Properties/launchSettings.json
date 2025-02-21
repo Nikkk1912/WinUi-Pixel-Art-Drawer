@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Pixel Art Project (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Pixel Art Project (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
