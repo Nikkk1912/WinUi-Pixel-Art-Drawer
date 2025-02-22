@@ -17,9 +17,49 @@
         </Grid.RowDefinitions>
 
         <!-- Menu Bar -->
-        <userControls:MenuBarStrip Grid.Row="0"/>
+        <userControls:MenuBarStrip Name="MenuBarStrip" Grid.Row="0"/>
 
         <!-- WorkSpace -->
-        <userControls:WorkSpace Grid.Row="1"/>
+        <!-- <userControls:WorkSpace Name="WorkSpace" Grid.Row="1"/> -->
+        
+        <Grid Grid.Row="1" Background="#21252b">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tool Box -->
+            <userControls:ToolBox Grid.Column="0" />
+
+            <!-- Work Area -->
+            <userControls:WorkArea Name="WorkArea" Grid.Column="1" Margin="5" />
+        
+            <!-- Layers and Colors -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Top part of Layers_Colors -->
+                <Rectangle Fill="LightBlue" Grid.Row="0" Margin="5"/>
+
+                <!-- Bottom part of Layers_Colors -->
+                <ColorPicker Grid.Row="1" Margin="5"
+                             Name="PrimaryColorPicker"
+                             Color="{Binding Color1, Mode=TwoWay}"
+                             ColorSpectrumShape="Ring"
+                             IsColorSliderVisible="True"
+                             IsColorChannelTextInputVisible="False"
+                             IsHexInputVisible="False"
+                             IsAlphaEnabled="False"
+                             IsAlphaSliderVisible="True"
+                             IsAlphaTextInputVisible="True"
+                             VerticalAlignment="Center"
+                />
+                
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

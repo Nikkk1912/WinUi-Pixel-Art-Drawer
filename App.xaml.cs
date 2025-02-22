@@ -46,5 +46,7 @@ namespace Pixel_Art_Project
         }
 
         private Window? m_window;
+
+        public Window? MWindow => m_window;
     }
 }

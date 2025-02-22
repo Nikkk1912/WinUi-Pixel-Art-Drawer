@@ -29,8 +29,6 @@ namespace Pixel_Art_Project.View.UserControls
         private bool _isPainting;
         private Brush _selectedColor;
         
-        public event EventHandler<GridSizeChangedEventArgs> GridSizeChanged;
-        
         // Constructor
         public WorkArea()
         {
@@ -58,7 +56,10 @@ namespace Pixel_Art_Project.View.UserControls
         
         public void OnGridSizeChanged(int columns, int rows)
         {
-            GridSizeChanged?.Invoke(this, new GridSizeChangedEventArgs(columns, rows));
+            _columns = columns;
+            _rows = rows;
+            
+            GeneratePixelCanvas();
         }
 
         // Methods

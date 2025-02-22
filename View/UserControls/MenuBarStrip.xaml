@@ -20,8 +20,7 @@
                     <MenuFlyoutItem Text="Redo" />
                 </MenuBarItem>
                 <MenuBarItem Title="Tools" FontSize="16" Height="40">
-                    <MenuFlyoutItem Text="1" />
-                    <MenuFlyoutItem Text="2" />
+                    <MenuFlyoutItem Text="Change Grid Size" Click="ChangeGridSize_Click"/>
                 </MenuBarItem>
             </MenuBar>
         </Grid>
