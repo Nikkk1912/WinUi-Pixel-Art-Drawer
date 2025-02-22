@@ -5,8 +5,6 @@ namespace Pixel_Art_Project.View.UserControls
 {
     public sealed partial class MenuBarStrip
     {
-        public event EventHandler CallWorkSpaceMethod = null!;
-        
         public MenuBarStrip()
         {
             InitializeComponent();

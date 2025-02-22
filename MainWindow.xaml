@@ -3,7 +3,6 @@
     x:Class="Pixel_Art_Project.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Pixel_Art_Project"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:Pixel_Art_Project.View.UserControls"
@@ -20,8 +19,6 @@
         <userControls:MenuBarStrip Name="MenuBarStrip" Grid.Row="0"/>
 
         <!-- WorkSpace -->
-        <!-- <userControls:WorkSpace Name="WorkSpace" Grid.Row="1"/> -->
-        
         <Grid Grid.Row="1" Background="#21252b">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
@@ -30,7 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Tool Box -->
-            <userControls:ToolBox Grid.Column="0" />
+            <userControls:ToolBox Name="ToolBox" Grid.Column="0" />
 
             <!-- Work Area -->
             <userControls:WorkArea Name="WorkArea" Grid.Column="1" Margin="5" />
@@ -43,7 +40,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Top part of Layers_Colors -->
-                <Rectangle Fill="LightBlue" Grid.Row="0" Margin="5"/>
+                <Rectangle Fill="LightBlue" Grid.Row="0" Margin="5"/> 
 
                 <!-- Bottom part of Layers_Colors -->
                 <ColorPicker Grid.Row="1" Margin="5"

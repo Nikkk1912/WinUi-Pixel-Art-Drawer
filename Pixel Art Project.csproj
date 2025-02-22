@@ -46,11 +46,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="View\UserControls\WorkSpace.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="View\UserControls\MenuBarStrip.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -17,11 +17,8 @@ namespace Pixel_Art_Project
         {
             InitializeComponent();
             
-            // _workArea = (WorkArea)FindName("WorkArea");
-            
             PrimaryColorPicker.DataContext = ColorInventory.Instance;
             PrimaryColorPicker.Color = ColorInventory.Instance.Color1;
-            
             // KeyDown += WorkArea_KeyDown;
         }
         
@@ -49,8 +46,8 @@ namespace Pixel_Art_Project
             {
                 if (int.TryParse(rowsTextBox.Text, out int rows) && int.TryParse(columnsTextBox.Text, out int cols))
                 {
-                    // _workArea.Columns = cols;
-                    // _workArea.Rows = rows;
+                    PixelSheet.Columns = cols;
+                    PixelSheet.Rows = rows;
                     // _workArea.OnGridSizeChanged(cols, rows);
                 }
                 else
