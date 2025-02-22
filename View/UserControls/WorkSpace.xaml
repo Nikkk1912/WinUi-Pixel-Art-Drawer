@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     
-    <Grid>
+    <Grid Background="#21252b">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="*"/>
@@ -35,7 +35,15 @@
             <ColorPicker Grid.Row="1" Margin="5"
                          Name="PrimaryColorPicker"
                          Color="{Binding Color1, Mode=TwoWay}"
-                          />
+                         ColorSpectrumShape="Ring"
+                         IsColorSliderVisible="True"
+                         IsColorChannelTextInputVisible="False"
+                         IsHexInputVisible="False"
+                         IsAlphaEnabled="False"
+                         IsAlphaSliderVisible="True"
+                         IsAlphaTextInputVisible="True"
+                         VerticalAlignment="Center"
+                         />
         </Grid>
     </Grid>
 </UserControl>

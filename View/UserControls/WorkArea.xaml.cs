@@ -9,12 +9,13 @@ using Microsoft.UI.Xaml.Shapes;
 using Pixel_Art_Project.Model;
 using PointerDeviceType = Microsoft.UI.Input.PointerDeviceType;
 using Windows.UI;
+using Pixel_Art_Project.Events;
 
 namespace Pixel_Art_Project.View.UserControls
 {
     public sealed partial class WorkArea : UserControl
     {
-        private int _columns = 20;
+        private int _columns = 30;
         private int _rows = 20;
 
         private double _pixelSize = 40;
@@ -28,18 +29,39 @@ namespace Pixel_Art_Project.View.UserControls
         private bool _isPainting;
         private Brush _selectedColor;
         
+        public event EventHandler<GridSizeChangedEventArgs> GridSizeChanged;
+        
+        // Constructor
         public WorkArea()
         {
             InitializeComponent();
 
             _pixelSheet = new PixelSheet(_rows, _columns);
             _colorInventory = ColorInventory.Instance;
-            this.KeyDown += WorkArea_KeyDown;
+            KeyDown += WorkArea_KeyDown;
 
             CreateUi();
             UpdatePixelSize();
         }
 
+        // Getters Setters
+        public int Columns
+        {
+            get => _columns;
+            set => _columns = value;
+        }
+        public int Rows
+        {
+            get => _rows;
+            set => _rows = value;
+        }
+        
+        public void OnGridSizeChanged(int columns, int rows)
+        {
+            GridSizeChanged?.Invoke(this, new GridSizeChangedEventArgs(columns, rows));
+        }
+
+        // Methods
         private void CreateUi()
         {
             if (WorkAreaGrid != null && PixelCanvas != null)
@@ -53,20 +75,17 @@ namespace Pixel_Art_Project.View.UserControls
                 PointerWheelChanged += WorkArea_MouseWheel;
             }
         }
-
         private void WorkArea_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             UpdatePixelSize();
             GeneratePixelCanvas();
         }
-
         private void UpdatePixelSize()
         {
             if (_containerGrid is not { ActualWidth: > 0, ActualHeight: > 0 }) return;
             _pixelSize = Math.Min(_containerGrid.ActualWidth / _columns, _containerGrid.ActualHeight / _rows);
             Console.WriteLine("Pixel size - " + _pixelSize);
         }
-
         private void GeneratePixelCanvas()
         {
             _pixelCanvas.Children.Clear();
@@ -75,7 +94,7 @@ namespace Pixel_Art_Project.View.UserControls
             {
                 for (var y = 0; y < _rows; y++)
                 {
-                    var rect = new Microsoft.UI.Xaml.Shapes.Rectangle
+                    var rect = new Rectangle
                     {
                         Width = _pixelSize,
                         Height = _pixelSize,
@@ -114,10 +133,9 @@ namespace Pixel_Art_Project.View.UserControls
                 }
             }
         }
-
         private void PaintPixel(object sender, PointerRoutedEventArgs e)
         {
-            var rect = sender as Microsoft.UI.Xaml.Shapes.Rectangle;
+            var rect = sender as Rectangle;
             if (rect == null) return;
 
             var mousePosition = e.GetCurrentPoint(_pixelCanvas).Position;
@@ -135,18 +153,16 @@ namespace Pixel_Art_Project.View.UserControls
             rect.Fill = _selectedColor;
             _pixelSheet.SetPixelColor(clickedRow, clickedColumn, rect.Fill);
         }
-
         private void UpdateSelectedColor(PointerRoutedEventArgs e)
         {
             _selectedColor = e.Pointer.PointerDeviceType switch
             {
                 PointerDeviceType.Mouse => e.GetCurrentPoint(_pixelCanvas).Properties.IsLeftButtonPressed
-                    ? new SolidColorBrush(_colorInventory.Color1)  // Convert Color1 to SolidColorBrush
-                    : new SolidColorBrush(_colorInventory.Color2), // Convert Color2 to SolidColorBrush
+                    ? new SolidColorBrush(_colorInventory.Color1) 
+                    : new SolidColorBrush(_colorInventory.Color2),
                 _ => _selectedColor
             };
         }
-
         private void WorkArea_MouseWheel(object sender, PointerRoutedEventArgs e)
         {
             double maxPixelSizeWidth = _containerGrid.ActualWidth / _columns;
@@ -178,10 +194,9 @@ namespace Pixel_Art_Project.View.UserControls
         }
         private void WorkArea_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            // Check if the "X" key is pressed
+            
             if (e.Key == Windows.System.VirtualKey.X)
             {
-                // Swap primary and secondary colors
                 _colorInventory.SwapColors();
             }
         }

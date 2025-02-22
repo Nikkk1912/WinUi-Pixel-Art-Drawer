@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Name="WorkAreaGrid">
-        <Rectangle Fill="White" />
+        <!-- <Rectangle Fill="White" /> -->
         <Canvas Name="PixelCanvas" Background="Transparent" />
         
     </Grid>
